@@ -32,20 +32,20 @@ import bencoder  # copied from https://github.com/utdemir/bencoder, and modified
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Read command line arguments")
+    parser = argparse.ArgumentParser(description="Display contents of a .torrent file in json")
 
     # Add arguments with appropriate types and help messages
-    parser.add_argument("input_file", help="Input file path")
+    parser.add_argument("torrent_file", help="Input file path")
     parser.add_argument("-p", "--pieces", action="store_true", help="Show Pieces")
 
     # Parse the arguments
     args = parser.parse_args()
 
     # Access the parsed arguments
-    input_file = args.input_file
+    torrent_file = args.torrent_file
     showPieces = args.pieces
 
-    f = open(input_file, "rb")
+    f = open(torrent_file, "rb")
     d = bencoder.decode(f.read())
     if not showPieces:
         del d["info"]["pieces"]  # That's a long hash
